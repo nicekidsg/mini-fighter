@@ -1,0 +1,12 @@
+{
+  "name": "mini-fighter",
+  "version": "1.0.0",
+  "description": "网页版四人乱斗小游戏：本地单机或跨地区联机",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
