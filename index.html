@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>小斗士 Mini Fighter</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#14151c; color:#eee; font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+    display:flex; flex-direction:column; align-items:center; min-height:100vh; padding:14px;
+  }
+  h1 { font-size:20px; margin:6px 0 10px; letter-spacing:2px; color:#ffd24e; }
+  #wrap { position:relative; width:960px; max-width:100%; }
+  canvas#cv { width:100%; display:block; border-radius:10px; background:#000; }
+  .overlay {
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:14px;
+    background:rgba(10,12,20,.82); border-radius:10px;
+  }
+  #menu h2 { font-size:36px; color:#ffd24e; letter-spacing:8px; text-shadow:0 0 24px #ffd24e55; }
+  #menu .sub { color:#9aa3b8; font-size:13px; margin-bottom:8px; }
+  button {
+    font-size:17px; padding:10px 34px; border:none; border-radius:8px; cursor:pointer;
+    background:#ffd24e; color:#222; font-weight:bold; letter-spacing:2px;
+  }
+  button:hover { background:#ffe28a; }
+  button.alt { background:#4ea3ff; color:#fff; }
+  button.alt:hover { background:#79bbff; }
+  button.ghost { background:transparent; color:#8a93a8; border:1px solid #444; font-size:13px; padding:6px 18px; }
+  input {
+    font-size:16px; padding:8px 12px; border-radius:8px; border:1px solid #444;
+    background:#1d2030; color:#eee; width:160px; text-align:center;
+  }
+  #onlineBox { display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:center; }
+  #status { color:#ff8a8a; font-size:14px; min-height:18px; }
+  /* 选人 */
+  #select { display:none; justify-content:flex-start; padding-top:18px; gap:8px; }
+  #select h3 { color:#ffd24e; letter-spacing:4px; font-size:20px; }
+  #grid {
+    display:grid; grid-template-columns:repeat(5, 140px); gap:9px; padding:4px;
+  }
+  .card {
+    background:#181a28; border:1px solid #2c2f45; border-radius:8px; cursor:pointer;
+    padding:6px; display:flex; flex-direction:column; align-items:center; gap:5px;
+    transition:transform .12s, border-color .12s;
+  }
+  .card:hover { transform:translateY(-4px); border-color:#ffd24e; }
+  .card canvas { border-radius:5px; width:100px; height:130px; }
+  .card .skills { font-size:10.5px; color:#9aa3b8; line-height:1.55; width:100%; text-align:center; }
+  .card .skills span { display:block; }
+  .card .skills i { font-style:normal; color:#5f7fb0; margin-left:4px; }
+  #help {
+    margin-top:10px; font-size:13px; color:#9aa3b8; line-height:1.9; text-align:center;
+  }
+  #help b { color:#ffd24e; }
+  kbd {
+    background:#2a2e40; border:1px solid #4a5068; border-radius:4px;
+    padding:1px 7px; font-family:monospace; color:#fff;
+  }
+</style>
+</head>
+<body>
+<h1>⚔ 小斗士 Mini Fighter</h1>
+<div id="wrap">
+  <canvas id="cv" width="960" height="540"></canvas>
+  <div id="menu" class="overlay">
+    <h2>小斗士</h2>
+    <div class="sub">十大职业 · 一键放技能 · 最多4人乱斗</div>
+    <button id="btnLocal">本地单机（VS 3电脑）</button>
+    <div id="onlineBox">
+      <input id="inName" maxlength="8" placeholder="昵称">
+      <input id="inRoom" maxlength="12" placeholder="房间号（如 888）">
+      <button class="alt" id="btnOnline">联机对战</button>
+    </div>
+    <div id="status"></div>
+  </div>
+  <div id="select" class="overlay">
+    <h3>选择你的斗士</h3>
+    <div id="grid"></div>
+    <button class="ghost" id="btnBack">← 返回</button>
+  </div>
+</div>
+<div id="help">
+  <b>移动</b> <kbd>W A S D</kbd> / 方向键　<b>跳</b> <kbd>K</kbd> / 空格　<b>普攻</b> <kbd>J</kbd>　<b>防御</b> <kbd>L</kbd>（按住）<br>
+  <b>一键技能</b> <kbd>U</kbd> <kbd>I</kbd> <kbd>O</kbd>（每个角色 3 个专属技能，消耗 MP）　<kbd>M</kbd> 静音　<kbd>Esc</kbd> 回菜单<br>
+  联机：朋友打开同一网址，输入相同房间号（最多4人）；部署方法见 README
+</div>
+<script src="characters.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
