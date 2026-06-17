@@ -945,6 +945,7 @@ function myStateMsg() {
 }
 function startOnline(name, room, ci) {
   if (location.protocol === 'file:') { setStatus('联机需要通过服务器访问页面（npm start）'); return; }
+  if (/github\.io$/.test(location.hostname)) { setStatus('此为静态演示页，仅支持单机；联机请自行部署（见 README）'); return; }
   setStatus('连接中…');
   const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
   net = new WebSocket(`${proto}//${location.host}`);
